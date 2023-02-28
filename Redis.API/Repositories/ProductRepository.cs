@@ -1,4 +1,5 @@
-﻿using Redis.API.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Redis.API.Models;
 
 namespace Redis.API.Repositories
 {
@@ -11,19 +12,21 @@ namespace Redis.API.Repositories
             _appDbContext = appDbContext;
         }
 
-        public Task<Product> CreateAsync(Product product)
+        public async Task<Product> CreateAsync(Product product)
         {
-            throw new NotImplementedException();
+            await _appDbContext.Products.AddAsync(product);
+            await _appDbContext.SaveChangesAsync();
+            return product;
         }
 
-        public Task<List<Product>> GetAsync()
+        public async Task<List<Product>> GetAsync()
         {
-            throw new NotImplementedException();
+            return await _appDbContext.Products.ToListAsync();
         }
 
-        public Task<Product> GetByIdAsync(int id)
+        public async Task<Product> GetByIdAsync(int Id)
         {
-            throw new NotImplementedException();
+            return await _appDbContext.Products.FindAsync(Id);
         }
     }
 }

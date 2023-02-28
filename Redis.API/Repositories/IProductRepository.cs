@@ -6,7 +6,7 @@ namespace Redis.API.Repositories
     {
         Task<List<Product>> GetAsync();
 
-        Task<Product> GetByIdAsync(int id);
+        Task<Product> GetByIdAsync(int Id);
 
         Task<Product> CreateAsync(Product product);
     }
